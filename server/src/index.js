@@ -27,7 +27,7 @@ app.get("/events", async (req, res) => {
   res.send(json);
 });
 
-app.post("/events", (req, res) => {
+app.post("/events", async (req, res) => {
   const body = req.body;
 
   if (!body.title) {
@@ -43,7 +43,15 @@ app.post("/events", (req, res) => {
     title: body.title,
     description: body.description,
   };
-  events.push(newEvent);
+
+  const jsonData = await fs.readFile(PATH_TO_DATA, "utf-8"); // [ { "id": "101" } ]
+  const parsedData = JSON.parse(jsonData); // [ { id: "101" } ]
+  parsedData.push(newEvent); // [ {id: "101"}, { id: "34792432" }]
+  await fs.writeFile(
+    PATH_TO_DATA,
+    JSON.stringify(parsedData, null, 2),
+    "utf-8",
+  );
   res.status(201).json(newEvent);
 });
 
