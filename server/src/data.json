@@ -1,25 +1,5 @@
 [
   {
-    "id": "b7df4848-c4de-41a6-acc9-653c250af98a",
-    "title": "Tekron",
-    "description": "This is a annual tekron fest"
-  },
-  {
-    "id": "2dd33cce-f685-463b-87d0-1c16c31354af",
-    "title": "FIFA",
-    "description": "This is a fifa tournament"
-  },
-  {
-    "id": "0d3ed8c1-b303-476d-bd04-06fc7112980b",
-    "title": "Freshers",
-    "description": "This is a freshers party"
-  },
-  {
-    "id": "24c05022-7ba3-4085-94e7-28cbc0ba03f0",
-    "title": "Blood donation camp",
-    "description": "This is a blood donation event"
-  },
-  {
     "id": "7b52ad7a-2cb5-406b-a1b2-effb88d9e6ff",
     "title": "BGMI",
     "description": "This is a BGMI tournament"

@@ -36,6 +36,16 @@ const App = () => {
       });
   };
 
+  const handleDelete = (eventId) => {
+    return () => {
+      fetch(`http://localhost:3000/events/${eventId}`, { method: "DELETE" })
+        .then(() => null)
+        .then(() => {
+          setEvents(events.filter((event) => event.id !== eventId));
+        });
+    };
+  };
+
   return (
     <div>
       <h1>ZeeMeet</h1>
@@ -57,9 +67,11 @@ const App = () => {
         <p>Loading...</p>
       ) : (
         events.map((event) => (
-          <div key={event.id}>
+          <div key={event.id} style={{ border: "1px solid black" }}>
             <h2>{event.title}</h2>
             <p>{event.description}</p>
+            <button onClick={handleDelete(event.id)}>Delete</button>
+            <button>Edit</button>
           </div>
         ))
       )}
