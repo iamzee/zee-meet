@@ -1,7 +1,10 @@
 const express = require("express");
 const crypto = require("node:crypto");
+const fs = require("node:fs/promises");
+const path = require("node:path");
 
 const app = express();
+const PATH_TO_DATA = path.join(__dirname, "data.json");
 
 let events = [
   {
@@ -18,8 +21,10 @@ let events = [
 
 app.use(express.json());
 
-app.get("/events", (req, res) => {
-  res.json(events);
+app.get("/events", async (req, res) => {
+  const json = await fs.readFile(PATH_TO_DATA, "utf-8");
+  res.set("Content-Type", "application/json");
+  res.send(json);
 });
 
 app.post("/events", (req, res) => {
