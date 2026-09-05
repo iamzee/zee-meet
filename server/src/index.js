@@ -63,10 +63,11 @@ app.post("/events", async (req, res) => {
   res.status(201).json(newEvent);
 });
 
-app.patch("/events/:id", (req, res) => {
+app.patch("/events/:id", async (req, res) => {
   const body = req.body;
   const id = req.params.id;
 
+  const events = await readFile();
   const index = events.findIndex((event) => event.id === id);
 
   if (index === -1) {
@@ -78,6 +79,8 @@ app.patch("/events/:id", (req, res) => {
     title: body.title || events[index].title,
     description: body.description || events[index].description,
   };
+
+  await writeFile(events);
 
   res.json(events[index]);
 });
