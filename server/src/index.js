@@ -2,10 +2,12 @@ const express = require("express");
 const crypto = require("node:crypto");
 const fs = require("node:fs/promises");
 const path = require("node:path");
+const cors = require("cors");
 
 const app = express();
 const PATH_TO_DATA = path.join(__dirname, "data.json");
 
+app.use(cors());
 app.use(express.json());
 
 const readFile = async () => {
