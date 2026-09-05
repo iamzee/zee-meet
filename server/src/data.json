@@ -1,8 +1,8 @@
 [
   {
     "id": "7b52ad7a-2cb5-406b-a1b2-effb88d9e6ff",
-    "title": "BGMI",
-    "description": "This is a BGMI tournament"
+    "title": "PUBG",
+    "description": "This is a PUBG tounament"
   },
   {
     "id": "9c9677a5-a180-4d27-9232-4f8b04330cbb",
@@ -18,5 +18,10 @@
     "id": "0117b3f1-06c3-4e18-9892-020802c14f45",
     "title": "ADA orientation",
     "description": "fdskjhsfgdkjhgfskj"
+  },
+  {
+    "id": "5f1e02ed-b1ed-4abd-b98c-033fe9d805bc",
+    "title": "fsd",
+    "description": "fds"
   }
 ]
