@@ -21,10 +21,23 @@ let events = [
 
 app.use(express.json());
 
+const readFile = async () => {
+  const jsonData = await fs.readFile(PATH_TO_DATA, "utf-8");
+  const parsedData = JSON.parse(jsonData);
+  return parsedData;
+};
+
+const writeFile = async (parsedData) => {
+  await fs.writeFile(
+    PATH_TO_DATA,
+    JSON.stringify(parsedData, null, 2),
+    "utf-8",
+  );
+};
+
 app.get("/events", async (req, res) => {
-  const json = await fs.readFile(PATH_TO_DATA, "utf-8");
-  res.set("Content-Type", "application/json");
-  res.send(json);
+  const parsedData = await readFile();
+  res.json(parsedData);
 });
 
 app.post("/events", async (req, res) => {
@@ -44,14 +57,9 @@ app.post("/events", async (req, res) => {
     description: body.description,
   };
 
-  const jsonData = await fs.readFile(PATH_TO_DATA, "utf-8"); // [ { "id": "101" } ]
-  const parsedData = JSON.parse(jsonData); // [ { id: "101" } ]
-  parsedData.push(newEvent); // [ {id: "101"}, { id: "34792432" }]
-  await fs.writeFile(
-    PATH_TO_DATA,
-    JSON.stringify(parsedData, null, 2),
-    "utf-8",
-  );
+  const parsedData = await readFile();
+  parsedData.push(newEvent);
+  await writeFile(parsedData);
   res.status(201).json(newEvent);
 });
 
