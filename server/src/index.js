@@ -6,19 +6,6 @@ const path = require("node:path");
 const app = express();
 const PATH_TO_DATA = path.join(__dirname, "data.json");
 
-let events = [
-  {
-    id: "101",
-    title: "Tekron",
-    description: "This is a tekron event",
-  },
-  {
-    id: "201",
-    title: "Blood Donation Camp",
-    description: "This is a blood donation camp",
-  },
-];
-
 app.use(express.json());
 
 const readFile = async () => {
@@ -85,9 +72,10 @@ app.patch("/events/:id", async (req, res) => {
   res.json(events[index]);
 });
 
-app.delete("/events/:id", (req, res) => {
+app.delete("/events/:id", async (req, res) => {
   const id = req.params.id;
 
+  let events = await readFile();
   const eventToDelete = events.find((event) => event.id === id);
 
   if (eventToDelete === undefined) {
@@ -95,6 +83,7 @@ app.delete("/events/:id", (req, res) => {
   }
 
   events = events.filter((event) => event.id !== id);
+  await writeFile(events);
 
   res.status(204).send();
 });
