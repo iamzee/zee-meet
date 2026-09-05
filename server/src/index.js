@@ -4,12 +4,12 @@ const app = express();
 
 const events = [
   {
-    id: "1",
+    id: "101",
     title: "Tekron",
     description: "This is a tekron event",
   },
   {
-    id: "2",
+    id: "201",
     title: "Blood Donation Camp",
     description: "This is a blood donation camp",
   },
