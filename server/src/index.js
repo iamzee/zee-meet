@@ -2,7 +2,7 @@ const express = require("express");
 
 const app = express();
 
-const events = [
+let events = [
   {
     id: "101",
     title: "Tekron",
@@ -17,6 +17,20 @@ const events = [
 
 app.get("/events", (req, res) => {
   res.json(events);
+});
+
+app.delete("/events/:id", (req, res) => {
+  const id = req.params.id;
+
+  const eventToDelete = events.find((event) => event.id === id);
+
+  if (eventToDelete === undefined) {
+    return res.status(404).json({ message: "Event does not exist" });
+  }
+
+  events = events.filter((event) => event.id !== id);
+
+  res.status(204).send();
 });
 
 app.listen(3000, () => {
